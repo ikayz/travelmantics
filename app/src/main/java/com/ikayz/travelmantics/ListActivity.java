@@ -32,7 +32,7 @@ public class ListActivity extends AppCompatActivity {
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                TextView tvDeals = findViewById(R.id.text_deals);
+                TextView tvDeals = findViewById(R.id.rv_deals);
                 TravelDeal td = dataSnapshot.getValue(TravelDeal.class);
                 tvDeals.setText(tvDeals.getText() + "\n" + td.getTitle());
             }
