@@ -52,7 +52,10 @@ public class InsertActivity extends AppCompatActivity {
     }
 
     private void clean() {
-
+        txtTitle.setText("");
+        txtDescription.setText("");
+        txtPrice.setText("");
+        txtTitle.requestFocus();
     }
 
     @Override
