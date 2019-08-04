@@ -3,4 +3,5 @@
     <string name="title_hint">Deal Title</string>
     <string name="hint_price">Price (numbers only)</string>
     <string name="description_hint">Description</string>
+    <string name="menu_title">save</string>
 </resources>
