@@ -30,12 +30,12 @@ public class FirebaseUtil {
     public static FirebaseAuth mFirebaseAuth;
     public static FirebaseAuth.AuthStateListener mAuthListener;
     public  static ArrayList<TravelDeal> mDeals;
-    private static Activity caller;
+    private static ListActivity caller;
     public static boolean isAdmin;
 
     private FirebaseUtil() {};
 
-    public static void openFbReference(String ref, final Activity callerActivity) {
+    public static void openFbReference(String ref, final ListActivity callerActivity) {
         if(sFirebaseUtil == null) {
             sFirebaseUtil = new FirebaseUtil();
             mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -80,7 +80,7 @@ public class FirebaseUtil {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 FirebaseUtil.isAdmin = true;
-                Log.d("Admin", "You are an administrator");
+                caller.showMenu();
             }
 
             @Override
