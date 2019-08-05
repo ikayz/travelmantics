@@ -67,6 +67,14 @@ public class InsertActivity extends AppCompatActivity {
         mDatabaseReference.push().setValue(deal);
     }
 
+    private void deleteDeal() {
+        if(deal == null) {
+            Toast.makeText(this, "Please save the deal before deleting", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mDatabaseReference.child(deal.getId()).removeValue();
+    }
+
     private void clean() {
         txtTitle.setText("");
         txtDescription.setText("");
