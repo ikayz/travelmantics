@@ -3,7 +3,6 @@ package com.ikayz.travelmantics;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +17,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -114,7 +111,7 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
             int position = getAdapterPosition();
             Log.d("Click", String.valueOf(position));
             TravelDeal selectedDeal = deals.get(position);
-            Intent intent = new Intent(view.getContext(), InsertActivity.class);
+            Intent intent = new Intent(view.getContext(), DealActivity.class);
             intent.putExtra("Deal", selectedDeal);
             view.getContext().startActivity(intent);
         }
