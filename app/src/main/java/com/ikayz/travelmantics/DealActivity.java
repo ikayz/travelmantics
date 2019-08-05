@@ -1,5 +1,6 @@
 package com.ikayz.travelmantics;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -114,13 +117,17 @@ public class DealActivity extends AppCompatActivity {
             StorageReference ref = FirebaseUtil.mStorageRef.child(imageUri.getLastPathSegment());
             ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                     Task<Uri> task = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                     task.addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             String url = uri.toString();
+                            String pictureName = taskSnapshot.getStorage().getPath();
                             deal.setImageUrl(url);
+                            deal.setImageName(pictureName);
+                            Log.d("Url", url);
+                            Log.d("Name", pictureName);
                             showImage(url);
                             Toast.makeText(getApplicationContext(),url,Toast.LENGTH_LONG).show();
                         }
@@ -147,6 +154,21 @@ public class DealActivity extends AppCompatActivity {
             return;
         }
         mDatabaseReference.child(deal.getId()).removeValue();
+        Log.d("image name", deal.getImageName());
+        if(deal.getImageName() != null && !deal.getImageName().isEmpty()) {
+            StorageReference picRef = FirebaseUtil.mStorage.getReference().child(deal.getImageName());
+            picRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
     }
 
     private void backToList() {
