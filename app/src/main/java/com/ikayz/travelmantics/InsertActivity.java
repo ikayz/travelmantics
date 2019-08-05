@@ -62,6 +62,13 @@ public class InsertActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.save_menu, menu);
+        return true;
+    }
+
     private void saveDeal() {
         deal.setTitle(txtTitle.getText().toString());
         deal.setDescription(txtDescription.getText().toString());
@@ -82,6 +89,11 @@ public class InsertActivity extends AppCompatActivity {
         mDatabaseReference.child(deal.getId()).removeValue();
     }
 
+    private void backToList() {
+        Intent intent = new Intent(this, ListActivity.class);
+        startActivity(intent);
+    }
+
     private void clean() {
         txtTitle.setText("");
         txtDescription.setText("");
@@ -89,15 +101,4 @@ public class InsertActivity extends AppCompatActivity {
         txtTitle.requestFocus();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.save_menu, menu);
-        return true;
-    }
-
-    private void backToList() {
-        Intent intent = new Intent(this, ListActivity.class);
-        startActivity(intent);
-    }
 }
