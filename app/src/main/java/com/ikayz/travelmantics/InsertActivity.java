@@ -49,10 +49,17 @@ public class InsertActivity extends AppCompatActivity {
                 saveDeal();
                 Toast.makeText(this, "Deal saved", Toast.LENGTH_LONG).show();
                 clean();
+                backToList();
+                return true;
+            case R.id.delete_menu:
+                deleteDeal();
+                Toast.makeText(this, "Deal Deleted", Toast.LENGTH_LONG).show();
+                backToList();
                 return true;
             default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+
     }
 
     private void saveDeal() {
@@ -87,5 +94,10 @@ public class InsertActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.save_menu, menu);
         return true;
+    }
+
+    private void backToList() {
+        Intent intent = new Intent(this, ListActivity.class);
+        startActivity(intent);
     }
 }
