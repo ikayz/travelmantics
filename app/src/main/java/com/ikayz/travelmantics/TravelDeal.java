@@ -1,9 +1,11 @@
 package com.ikayz.travelmantics;
 
-/* 
+import java.io.Serializable;
+
+/*
 Created by ikayz on 04/08/2019
 */
-public class TravelDeal {
+public class TravelDeal implements Serializable {
     private String id;
     private String title;
     private String description;
