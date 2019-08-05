@@ -1,6 +1,7 @@
 package com.ikayz.travelmantics;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -78,7 +79,8 @@ public class FirebaseUtil {
         ChildEventListener listener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                FirebaseUtil.isAdmin = true;
+                Log.d("Admin", "You are an administrator");
             }
 
             @Override
@@ -101,6 +103,7 @@ public class FirebaseUtil {
 
             }
         };
+        ref.addChildEventListener(listener);
     }
 
     public static void attachListener() {
