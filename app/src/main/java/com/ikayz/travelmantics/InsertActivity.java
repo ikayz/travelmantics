@@ -25,7 +25,7 @@ public class InsertActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert);
-        FirebaseUtil.openFbReference("traveldeals");
+//        FirebaseUtil.openFbReference("traveldeals");
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
         txtTitle = findViewById(R.id.text_title);
@@ -78,7 +78,6 @@ public class InsertActivity extends AppCompatActivity {
         } else {
             mDatabaseReference.child(deal.getId()).setValue(deal);
         }
-        mDatabaseReference.push().setValue(deal);
     }
 
     private void deleteDeal() {
