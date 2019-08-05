@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class DealActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
+    private static final int PICTURE_RESULT = 42;
     EditText txtTitle;
     EditText txtDescription;
     EditText txtPrice;
@@ -40,6 +43,17 @@ public class DealActivity extends AppCompatActivity {
         txtTitle.setText(deal.getTitle());
         txtDescription.setText(deal.getDescription());
         txtPrice.setText(deal.getPrice());
+        Button btnImage = findViewById(R.id.btn_image);
+        btnImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(intent.createChooser(intent, "Insert Picture"),
+                        PICTURE_RESULT);
+            }
+        });
     }
 
     @Override
