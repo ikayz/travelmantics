@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /*
@@ -89,13 +91,19 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
 
     public class DealViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
+        TextView tv_description;
+        TextView tv_price;
         public DealViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_title = itemView.findViewById(R.id.tv_title);
+            tv_description = itemView.findViewById(R.id.tv_description);
+            tv_price = itemView.findViewById(R.id.tv_price);
         }
 
         public void bind(TravelDeal deal) {
             tv_title.setText(deal.getTitle());
+            tv_description.setText(deal.getDescription());
+            tv_price.setText(deal.getPrice());
         }
     }
 }
